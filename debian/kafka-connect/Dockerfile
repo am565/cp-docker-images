@@ -38,4 +38,4 @@ RUN echo "===> Installing JDBC, Elasticsearch and Hadoop connectors ..." \
     && yum clean all && rm -rf /tmp/* /var/cache/dnf/*
 
 RUN echo "===> Installing GCS Sink Connector ..."
-RUN confluent-hub install confluentinc/kafka-connect-gcs:latest --no-prompt
+# RUN confluent-hub install confluentinc/kafka-connect-gcs:latest --no-prompt
