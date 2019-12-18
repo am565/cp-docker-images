@@ -76,7 +76,7 @@ RUN echo "===> Updating debian ....." \
                 python3 \
                 python3-pip \
     && echo "===> Installing python packages ..."  \
-    && pip3 install --no-cache-dir git+https://github.com/confluentinc/confluent-docker-utils@v0.0.20 \
+    && pip3 install --no-cache-dir git+https://github.com/confluentinc/confluent-docker-utils@master \
     && yum remove -y git \
     && echo "Installing Zulu OpenJDK ${ZULU_OPENJDK_VERSION}" \
     && rpm --import http://repos.azulsystems.com/RPM-GPG-KEY-azulsystems \
