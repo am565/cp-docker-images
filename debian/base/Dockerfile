@@ -62,7 +62,7 @@ ENV ZULU_OPENJDK_VERSION="8"
 # This affects how strings in Java class files are interpreted.  We want UTF-8 and this is the only locale in the
 # base image that supports it
 ENV LANG="C.UTF-8"
-
+COPY confluent-docker-utils/ /tmp/
 RUN echo "===> Updating debian ....." \
     # TODO debian jessie has been deprecated and is only ex
     # && yum update \
@@ -76,7 +76,7 @@ RUN echo "===> Updating debian ....." \
                 python3 \
                 python3-pip \
     && echo "===> Installing python packages ..."  \
-    && pip3 install --no-cache-dir git+https://github.com/confluentinc/confluent-docker-utils@master \
+    && pip3 install --no-cache-dir /tmp/confluent-docker-utils/ \
     && yum remove -y git \
     && echo "Installing Zulu OpenJDK ${ZULU_OPENJDK_VERSION}" \
     && rpm --import http://repos.azulsystems.com/RPM-GPG-KEY-azulsystems \
