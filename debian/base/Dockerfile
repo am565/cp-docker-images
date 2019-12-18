@@ -65,7 +65,7 @@ ENV LANG="C.UTF-8"
 
 RUN echo "===> Updating debian ....." \
     # TODO debian jessie has been deprecated and is only ex
-    && yum update \
+    # && yum update \
     && echo "===> Installing curl wget netcat python...." \
     && yum install -y \
                 curl \
@@ -84,7 +84,10 @@ RUN echo "===> Updating debian ....." \
     && yum install -y zulu-${ZULU_OPENJDK_VERSION} \
     && echo "===> Installing Kerberos Patch ..." \
     && yum install -y krb5-workstation krb5-devel \
-    && yum clean all
+    && yum clean all \
+    && rpm --import http://packages.confluent.io/rpm/3.0/archive.key
+COPY confluent-dist.repo /etc/yum.repos.d/
+COPY confluent.repo /etc/yum.repos.d/
     # && echo "===> Adding confluent repository...${CONFLUENT_PACKAGES_REPO}/deb/${CONFLUENT_MAJOR_VERSION}.${CONFLUENT_MINOR_VERSION}" \
     # && if [ "x$ALLOW_UNSIGNED" = "xtrue" ]; then echo "APT::Get::AllowUnauthenticated \"true\";" > /etc/apt/apt.conf.d/allow_unauthenticated; else curl -L ${CONFLUENT_PACKAGES_REPO}/deb/${CONFLUENT_MAJOR_VERSION}.${CONFLUENT_MINOR_VERSION}/archive.key | apt-key add - ; fi \
     # && echo "deb [arch=amd64] ${CONFLUENT_PACKAGES_REPO}/deb/${CONFLUENT_MAJOR_VERSION}.${CONFLUENT_MINOR_VERSION} stable main" >> /etc/apt/sources.list

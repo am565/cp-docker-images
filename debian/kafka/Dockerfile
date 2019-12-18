@@ -35,10 +35,10 @@ ENV COMPONENT=kafka
 EXPOSE 9092
 
 RUN echo "===> installing ${COMPONENT}..." \
-    && apt-get update && apt-get install -y confluent-kafka-${SCALA_VERSION}=${CONFLUENT_VERSION}${CONFLUENT_PLATFORM_LABEL}-${CONFLUENT_DEB_VERSION} \
+    && yum install -y confluent-kafka-2.11 \
     \
     && echo "===> clean up ..."  \
-    && apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* \
+    && yum clean all && rm -rf /tmp/* /var/cache/dnf/* \
     \
     && echo "===> Setting up ${COMPONENT} dirs..." \
     && mkdir -p /var/lib/${COMPONENT}/data /etc/${COMPONENT}/secrets\

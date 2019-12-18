@@ -30,15 +30,15 @@ ENV COMPONENT=kafka-connect
 EXPOSE 8083
 
 RUN echo "===> Installing Schema Registry (for Avro jars) ..." \
-    && apt-get -qq update \
-    && apt-get install -y \
-        confluent-schema-registry=${CONFLUENT_VERSION}${CONFLUENT_PLATFORM_LABEL}-${CONFLUENT_DEB_VERSION} \
+    && yum install -y \
+        confluent-schema-registry \
     && echo "===> Installing Controlcenter for monitoring interceptors ..."\
-    && apt-get install -y confluent-control-center=${CONFLUENT_VERSION}${CONFLUENT_PLATFORM_LABEL}-${CONFLUENT_DEB_VERSION} \
+    && yum install -y confluent-control-center \
     && echo "===> Installing Confluent Hub client ..."\
-    && apt-get install -y confluent-hub-client=${CONFLUENT_VERSION}${CONFLUENT_PLATFORM_LABEL}-${CONFLUENT_DEB_VERSION} \
+    # package not found on rpm repository
+    # && apt-get install -y confluent-hub-client=${CONFLUENT_VERSION}${CONFLUENT_PLATFORM_LABEL}-${CONFLUENT_DEB_VERSION} \
     && echo "===> Cleaning up ..."  \
-    && apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* \
+    && yum clean all && rm -rf /tmp/* /var/cache/dnf/* \
     echo "===> Setting up ${COMPONENT} dirs ..." \
     && mkdir -p /etc/${COMPONENT} /etc/${COMPONENT}/secrets /etc/${COMPONENT}/jars \
     && chmod -R ag+w /etc/${COMPONENT} /etc/${COMPONENT}/secrets /etc/${COMPONENT}/jars
