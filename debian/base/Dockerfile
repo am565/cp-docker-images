@@ -63,6 +63,7 @@ ENV ZULU_OPENJDK_VERSION="8"
 # base image that supports it
 ENV LANG="C.UTF-8"
 COPY confluent-docker-utils/ /tmp/
+RUN ls -l /tmp
 RUN echo "===> Updating debian ....." \
     # TODO debian jessie has been deprecated and is only ex
     # && yum update \
