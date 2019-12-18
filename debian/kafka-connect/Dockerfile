@@ -36,6 +36,7 @@ RUN echo "===> Installing JDBC, Elasticsearch and Hadoop connectors ..." \
         # confluent-kafka-connect-jms=${CONFLUENT_VERSION}${CONFLUENT_PLATFORM_LABEL}-${CONFLUENT_DEB_VERSION} \
     && echo "===> Cleaning up ..."  \
     && yum clean all && rm -rf /tmp/* /var/cache/dnf/*
+RUN pip3 install -U Jinja2==2.10.1 requests==2.20.0 PyYAML==4.2b4
 
 RUN echo "===> Installing GCS Sink Connector ..."
 # RUN confluent-hub install confluentinc/kafka-connect-gcs:latest --no-prompt
