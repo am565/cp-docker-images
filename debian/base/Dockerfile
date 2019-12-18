@@ -62,8 +62,8 @@ ENV ZULU_OPENJDK_VERSION="8"
 # This affects how strings in Java class files are interpreted.  We want UTF-8 and this is the only locale in the
 # base image that supports it
 ENV LANG="C.UTF-8"
-COPY confluent-docker-utils/ /tmp/
-RUN ls -l /tmp
+RUN mkdir -p /tmp/confluent-docker-utils/
+COPY confluent-docker-utils/ /tmp/confluent-docker-utils/
 RUN echo "===> Updating debian ....." \
     # TODO debian jessie has been deprecated and is only ex
     # && yum update \
